@@ -26,7 +26,7 @@ var getAdsArray = function (numberOfAds) {
           },
           location: {
             x: randomInteger(25, 1175) - PIN_WIDTH / 2,
-            y: randomInteger(200, 631) - PIN_HEIGHT
+            y: randomInteger(130 + PIN_HEIGHT, 631) - PIN_HEIGHT
           }
         }
     );

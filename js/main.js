@@ -1,23 +1,21 @@
 'use strict';
 
-var randomInteger = function (min, max) {
-  var rand = min + Math.random() * (max + 1 - min);
-  rand = Math.floor(rand);
-  return rand;
-};
-
-var apartmentTypes = ['palace', 'flat', 'house', 'bungalo'];
-
 var NUMBER_OF_ADS = 8;
 var PIN_WIDTH = 50;
 var PIN_HEIGHT = 70;
 
+var randomInteger = function (min, max) {
+  return Math.floor(min + Math.random() * (max + 1 - min));
+};
+
+var apartmentTypes = ['palace', 'flat', 'house', 'bungalo'];
+
 var map = document.querySelector('.map');
 map.classList.remove('map--faded'); /* Временно активный режим */
 
-var getAdsArray = function () {
+var getAdsArray = function (numberOfAds) {
   var ads = [];
-  for (var i = 1; i <= NUMBER_OF_ADS; i++) {
+  for (var i = 1; i <= numberOfAds; i++) {
     ads.push(
         {
           author: {
@@ -28,7 +26,7 @@ var getAdsArray = function () {
           },
           location: {
             x: randomInteger(25, 1175) - PIN_WIDTH / 2,
-            y: randomInteger(130, 631) - PIN_HEIGHT
+            y: randomInteger(200, 631) - PIN_HEIGHT
           }
         }
     );
@@ -36,7 +34,7 @@ var getAdsArray = function () {
   return ads;
 };
 
-var ads = getAdsArray();
+var ads = getAdsArray(NUMBER_OF_ADS);
 
 var similarAddTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 

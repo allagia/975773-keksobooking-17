@@ -34,8 +34,6 @@ var getAdsArray = function (numberOfAds) {
   return ads;
 };
 
-var ads = getAdsArray(NUMBER_OF_ADS);
-
 var similarAddTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
 var renderAd = function (ad) {
@@ -52,7 +50,7 @@ var similarListElement = document.querySelector('.map__pins');
 
 var fragment = document.createDocumentFragment();
 
-var appendAd = function () {
+var appendAd = function (ads) {
   for (var i = 0; i < ads.length; i++) {
     fragment.appendChild(renderAd(ads[i]));
   }
@@ -60,4 +58,4 @@ var appendAd = function () {
   similarListElement.appendChild(fragment);
 };
 
-appendAd();
+appendAd(getAdsArray(NUMBER_OF_ADS));

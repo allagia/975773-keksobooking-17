@@ -10,7 +10,7 @@ var MAIN_PIN_AFTER_HEIGHT = 22;
 var adForm = document.querySelector('.ad-form');
 var mainPin = document.querySelector('.map__pin--main');
 var apartmentTypes = ['palace', 'flat', 'house', 'bungalo'];
-var map = document.querySelector('.map');
+var pageMap = document.querySelector('.map');
 var adFormElements = adForm.querySelectorAll('.ad-form__element');
 var inputAddress = adForm.querySelector('input[name = address]');
 
@@ -83,25 +83,32 @@ var appendAd = function (ads) {
 
 appendAd(getAdsArray(NUMBER_OF_ADS));
 
+var setAdress = function (isActive) {
+  var coordinateX = mainPin.style.left;
+  coordinateX = coordinateX.substring(0, coordinateX.length - 2);
+  var coordinateY = mainPin.style.top;
+  coordinateY = coordinateY.substring(0, coordinateY.length - 2);
 
-var leftCoordinate = mainPin.style.left;
-leftCoordinate = leftCoordinate.substring(0, leftCoordinate.length - 2);
+  var x = Number(coordinateX) + Number(MAIN_PIN_WIDTH / 2);
+  var y;
 
-var topCoordinate = mainPin.style.top;
-topCoordinate = topCoordinate.substring(0, topCoordinate.length - 2);
+  if (isActive) {
+    y = Number(coordinateY) + MAIN_PIN_HEIGHT + MAIN_PIN_AFTER_HEIGHT;
+  } else {
+    y = Number(coordinateY) + Number(MAIN_PIN_HEIGHT / 2);
+  }
 
-var middleCoordinateX = Number(leftCoordinate) + Number(MAIN_PIN_WIDTH / 2); /* коордиината Х середины главной метки */
-var middleCoordinateY = Number(topCoordinate) + Number(MAIN_PIN_HEIGHT / 2); /* коордиината Y середины главной метки */
-var bottomCoordinateX = Number(topCoordinate) + MAIN_PIN_HEIGHT + MAIN_PIN_AFTER_HEIGHT; /* координата Х острого конца главной метки*/
+  inputAddress.value = x + ', ' + y;
+};
 
-inputAddress.setAttribute('value', middleCoordinateX + ', ' + middleCoordinateY); /* присвоение значения полю Адрес при неактивном состоянии*/
+setAdress(false);
 
 mainPin.addEventListener('mouseup', function () {
   mainPin.addEventListener('click', function () {
-    map.classList.remove('map--faded');
+    pageMap.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     deleteDisabledttribute();
   });
 
-  inputAddress.setAttribute('value', middleCoordinateX + ', ' + bottomCoordinateX); /* присвоение значения полю Адрес при активном состоянии*/
+  setAdress(true);
 });

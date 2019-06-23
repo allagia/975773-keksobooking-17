@@ -3,15 +3,38 @@
 var NUMBER_OF_ADS = 8;
 var PIN_WIDTH = 50;
 var PIN_HEIGHT = 70;
+var MAIN_PIN_WIDTH = 65;
+var MAIN_PIN_HEIGHT = 65;
+var MAIN_PIN_AFTER_HEIGHT = 22;
+
+var adForm = document.querySelector('.ad-form');
+var mainPin = document.querySelector('.map__pin--main');
+var apartmentTypes = ['palace', 'flat', 'house', 'bungalo'];
+var pageMap = document.querySelector('.map');
+var adFormElements = adForm.querySelectorAll('.ad-form__element');
+var inputAddress = adForm.querySelector('input[name = address]');
+
+var addDisabledAttribute = function () {
+  adForm.querySelector('.ad-form-header').setAttribute('disabled', '');
+
+  adFormElements.forEach(function (element) {
+    element.setAttribute('disabled', '');
+  });
+};
+addDisabledAttribute();
+
+var deleteDisabledttribute = function () {
+  adForm.querySelector('.ad-form-header').removeAttribute('disabled', '');
+
+  adFormElements.forEach(function (element) {
+    element.removeAttribute('disabled', '');
+  });
+};
+
 
 var randomInteger = function (min, max) {
   return Math.floor(min + Math.random() * (max + 1 - min));
 };
-
-var apartmentTypes = ['palace', 'flat', 'house', 'bungalo'];
-
-var map = document.querySelector('.map');
-map.classList.remove('map--faded'); /* Временно активный режим */
 
 var getAdsArray = function (numberOfAds) {
   var ads = [];
@@ -59,3 +82,33 @@ var appendAd = function (ads) {
 };
 
 appendAd(getAdsArray(NUMBER_OF_ADS));
+
+var setAdress = function (isActive) {
+  var coordinateX = mainPin.style.left;
+  coordinateX = coordinateX.substring(0, coordinateX.length - 2);
+  var coordinateY = mainPin.style.top;
+  coordinateY = coordinateY.substring(0, coordinateY.length - 2);
+
+  var x = Number(coordinateX) + Number(MAIN_PIN_WIDTH / 2);
+  var y;
+
+  if (isActive) {
+    y = Number(coordinateY) + MAIN_PIN_HEIGHT + MAIN_PIN_AFTER_HEIGHT;
+  } else {
+    y = Number(coordinateY) + Number(MAIN_PIN_HEIGHT / 2);
+  }
+
+  inputAddress.value = x + ', ' + y;
+};
+
+setAdress(false);
+
+mainPin.addEventListener('mouseup', function () {
+  mainPin.addEventListener('click', function () {
+    pageMap.classList.remove('map--faded');
+    adForm.classList.remove('ad-form--disabled');
+    deleteDisabledttribute();
+  });
+
+  setAdress(true);
+});

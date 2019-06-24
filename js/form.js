@@ -19,6 +19,7 @@
     var value = lodgingSelect.options[selectedIndex].value;
 
     priceInput.placeholder = lodgingPrice[value];
+    priceInput.min = lodgingPrice[value];
   });
 
   timein.addEventListener('change', function () {

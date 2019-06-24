@@ -83,17 +83,16 @@ var appendAd = function (ads) {
 
 appendAd(getAdsArray(NUMBER_OF_ADS));
 
-var setAdress = function (isActive) {
+var setAddress = function (isActive) {
   var coordinateX = mainPin.style.left;
   coordinateX = coordinateX.substring(0, coordinateX.length - 2);
   var coordinateY = mainPin.style.top;
   coordinateY = coordinateY.substring(0, coordinateY.length - 2);
 
   var x = Number(coordinateX) + Number(MAIN_PIN_WIDTH / 2);
-  var y;
 
   if (isActive) {
-    y = Number(coordinateY) + MAIN_PIN_HEIGHT + MAIN_PIN_AFTER_HEIGHT;
+    var y = Number(coordinateY) + MAIN_PIN_HEIGHT + MAIN_PIN_AFTER_HEIGHT;
   } else {
     y = Number(coordinateY) + Number(MAIN_PIN_HEIGHT / 2);
   }
@@ -101,7 +100,7 @@ var setAdress = function (isActive) {
   inputAddress.value = x + ', ' + y;
 };
 
-setAdress(false);
+setAddress();
 
 mainPin.addEventListener('mouseup', function () {
   mainPin.addEventListener('click', function () {
@@ -110,5 +109,5 @@ mainPin.addEventListener('mouseup', function () {
     deleteDisabledttribute();
   });
 
-  setAdress(true);
+  setAddress(true);
 });

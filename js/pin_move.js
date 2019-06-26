@@ -44,7 +44,7 @@
       var topCoord = mainPin.offsetTop - shift.y;
       var leftCoord = mainPin.offsetLeft - shift.x;
 
-      if ((topCoord >= 130) && (topCoord <= 630)) {
+      if (topCoord >= 130 && topCoord <= 630) {
         mainPin.style.top = topCoord + 'px';
       } else if (topCoord < 130) {
         mainPin.style.top = 130 + 'px';

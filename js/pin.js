@@ -27,5 +27,5 @@
     similarListElement.appendChild(fragment);
   };
 
-  appendAd(window.getAdsArray(NUMBER_OF_ADS));
+  appendAd(window.data.getAdsArray(NUMBER_OF_ADS));
 })();

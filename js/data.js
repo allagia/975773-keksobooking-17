@@ -20,7 +20,7 @@
     return Math.floor(min + Math.random() * (max + 1 - min));
   };
 
-  window.getAdsArray = function (numberOfAds) {
+  var getAdsArray = function (numberOfAds) {
     var ads = [];
     for (var i = 1; i <= numberOfAds; i++) {
       ads.push(
@@ -39,5 +39,9 @@
       );
     }
     return ads;
+  };
+
+  window.data = {
+    getAdsArray: getAdsArray
   };
 })();

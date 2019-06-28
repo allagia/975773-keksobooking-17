@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var NUMBER_OF_ADS = 8;
+  // var NUMBER_OF_ADS = 8;
 
   var similarAddTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
@@ -27,5 +27,6 @@
     similarListElement.appendChild(fragment);
   };
 
-  appendAd(window.data.getAdsArray(NUMBER_OF_ADS));
+  // appendAd(window.data.getAdsArray(NUMBER_OF_ADS));
+  appendAd(window.dataFromServer); /* здесь использую глобальную переменную с даннымии с сервера, но браузер не распознает массив, а показывается undefined*/
 })();

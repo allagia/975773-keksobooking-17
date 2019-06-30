@@ -47,10 +47,15 @@
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
+      var errorTemplate = document.querySelector('#error').content.querySelector('.error');
+      var errorMessage = errorTemplate.cloneNode(true);
+      var mainBlock = document.querySelector('main');
+
       if (xhr.status === 200) {
         onSuccess(xhr.response);
       } else {
-        onError('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);
+        // onError('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText); /*удалить эту часть или оставить*/
+        onError(mainBlock.appendChild(errorMessage));
       }
     });
 
@@ -62,7 +67,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000; // 10s
+    xhr.timeout = 10000;
 
     xhr.open('GET', url);
     xhr.send();

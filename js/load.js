@@ -1,8 +1,13 @@
 'use strict';
 (function () {
   var onError = function (message) {
-    console.error(message);
+    var errorTemplate = document.querySelector('#error').content.querySelector('.error');
+    var mainBlock = document.querySelector('main');
+
+    message = errorTemplate.cloneNode(true);
+
+    mainBlock.appendChild(message);
   };
 
-  window.data.load('https://js.dump.academy/keksobooking1/data', window.appendAd, onError);
+  window.data.load('https://js.dump.academy/keksobooking/data', window.appendAd, onError);
 })();

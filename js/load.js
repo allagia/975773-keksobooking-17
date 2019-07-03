@@ -3,36 +3,17 @@
   var mapFilters = document.querySelector('.map__filters');
   var housingType = mapFilters.querySelector('select[name = housing-type]');
 
-  var allPins = [];
-
-  var onError = function (message) {
-    var errorTemplate = document.querySelector('#error').content.querySelector('.error');
-    var mainBlock = document.querySelector('main');
-
-    message = errorTemplate.cloneNode(true);
-
-    mainBlock.appendChild(message);
+  var onError = function () {
+    window.data.showErrorMessage();
   };
 
   var onSuccess = function (data) {
-    allPins = data;
+    window.allPins = data;
+
     window.appendAd(data.slice(0, 5));
 
-    var filterPins = function (filter) {
-      return filter === 'any'
-        ? allPins
-        : allPins.filter(function (pin) {
-          return pin.offer.type === filter;
-        });
-    };
-
-    var reloadPins = function (filter) {
-      window.data.removePin();
-      window.appendAd(filterPins(filter).slice(0, 5));
-    };
-
     housingType.addEventListener('change', function () {
-      reloadPins(housingType.options[housingType.selectedIndex].value);
+      window.data.reloadPins(housingType.options[housingType.selectedIndex].value);
     });
   };
 

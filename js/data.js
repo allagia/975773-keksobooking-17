@@ -7,6 +7,8 @@
   var apartmentTypes = ['palace', 'flat', 'house', 'bungalo'];
   var adFormElements = adForm.querySelectorAll('.ad-form__element');
 
+  window.allPins = [];
+
   var addDisabledAttribute = function () {
     adForm.querySelector('.ad-form-header').setAttribute('disabled', '');
 
@@ -79,9 +81,33 @@
     });
   };
 
+  var filterPins = function (filter) {
+    return filter === 'any'
+      ? allPins
+      : allPins.filter(function (pin) {
+        return pin.offer.type === filter;
+      });
+  };
+
+  var reloadPins = function (filter) {
+    window.data.removePin();
+    window.appendAd(filterPins(filter).slice(0, 5));
+  };
+
+  var showErrorMessage = function (message) {
+    var errorTemplate = document.querySelector('#error').content.querySelector('.error');
+    var mainBlock = document.querySelector('main');
+
+    message = errorTemplate.cloneNode(true);
+
+    mainBlock.appendChild(message);
+  };
+
   window.data = {
     getAdsArray: getAdsArray,
     load: load,
-    removePin: removePin
+    removePin: removePin,
+    reloadPins: reloadPins,
+    showErrorMessage: showErrorMessage
   };
 })();

@@ -68,8 +68,20 @@
     xhr.send();
   };
 
+  var removePin = function () {
+    var mapPins = document.querySelector('.map__pins');
+    var pins = mapPins.querySelectorAll('button.map__pin:not(.map__pin--main)');
+
+    var pinsArray = Array.from(pins);
+
+    pinsArray.forEach(function (element) {
+      mapPins.removeChild(element);
+    });
+  };
+
   window.data = {
     getAdsArray: getAdsArray,
-    load: load
+    load: load,
+    removePin: removePin
   };
 })();

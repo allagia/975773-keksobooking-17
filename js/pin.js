@@ -23,10 +23,4 @@
 
     similarListElement.appendChild(fragment);
   };
-
-  // window.removeAd = function (ads) {
-  //   var similarListElement = document.querySelector('.map__pins');
-  //   window.appendAd();
-  //   similarListElement.removeChild(renderAd(ads));
-  // };
 })();

@@ -83,8 +83,8 @@
 
   var filterPins = function (filter) {
     return filter === 'any'
-      ? allPins
-      : allPins.filter(function (pin) {
+      ? window.allPins
+      : window.allPins.filter(function (pin) {
         return pin.offer.type === filter;
       });
   };

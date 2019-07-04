@@ -51,14 +51,14 @@
     var similarAddTemplate = document.querySelector('#card').content.querySelector('.popup');
     var element = similarAddTemplate.cloneNode(true);
 
-    element.querySelector('.popup__title').innerHTML = ad.offer.title;
-    element.querySelector('.popup__text--address').innerHTML = ad.offer.address;
-    element.querySelector('.popup__text--price').innerHTML = ad.offer.price + '₽/ночь';
-    element.querySelector('.popup__type').innerHTML = housingTypeDict[ad.offer.type];
-    element.querySelector('.popup__text--capacity').innerHTML = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
-    element.querySelector('.popup__text--time').innerHTML = 'Заезд после ' + ad.offer.checkin + ',  выезд до ' + ad.offer.checkout;
+    element.querySelector('.popup__title').textContent = ad.offer.title;
+    element.querySelector('.popup__text--address').textContent = ad.offer.address;
+    element.querySelector('.popup__text--price').textContent = ad.offer.price + '₽/ночь';
+    element.querySelector('.popup__type').textContent = housingTypeDict[ad.offer.type];
+    element.querySelector('.popup__text--capacity').textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
+    element.querySelector('.popup__text--time').textContent = 'Заезд после ' + ad.offer.checkin + ',  выезд до ' + ad.offer.checkout;
     element.querySelector('.popup__features').innerHTML = renderFeatures(ad.offer.features);
-    element.querySelector('.popup__description').innerHTML = ad.offer.description;
+    element.querySelector('.popup__description').textContent = ad.offer.description;
     element.querySelector('.popup__photos').innerHTML = renderPhotos(ad.offer.photos);
     element.querySelector('.popup__avatar').src = ad.author.avatar;
 

@@ -1,13 +1,21 @@
 'use strict';
 (function () {
-  var onError = function (message) {
-    var errorTemplate = document.querySelector('#error').content.querySelector('.error');
-    var mainBlock = document.querySelector('main');
+  var mapFilters = document.querySelector('.map__filters');
+  var housingType = mapFilters.querySelector('select[name = housing-type]');
 
-    message = errorTemplate.cloneNode(true);
-
-    mainBlock.appendChild(message);
+  var onError = function () {
+    window.data.showErrorMessage();
   };
 
-  window.data.load('https://js.dump.academy/keksobooking/data', window.appendAd, onError);
+  var onSuccess = function (data) {
+    window.allPins = data;
+
+    window.appendAd(data.slice(0, 5));
+
+    housingType.addEventListener('change', function () {
+      window.data.reloadPins(housingType.options[housingType.selectedIndex].value);
+    });
+  };
+
+  window.data.load('https://js.dump.academy/keksobooking/data', onSuccess, onError);
 })();

@@ -32,26 +32,26 @@
     setAddress(true);
   });
 
-  var lodgingPrice = {
+  var housingPrice = {
     bungalo: 0,
     flat: 1000,
     house: 5000,
     palace: 10000
   };
 
-  var lodgingSelect = document.querySelector('select[name = type]');
+  var housingTypeSelect = document.querySelector('select[name = type]');
   var priceInput = document.querySelector('input[name = price]');
   var timein = document.querySelector('select[name = timein]');
   var timeout = document.querySelector('select[name = timeout]');
 
 
-  lodgingSelect.addEventListener('change', function () {
-    var selectedIndex = lodgingSelect.selectedIndex;
+  housingTypeSelect.addEventListener('change', function () {
+    var selectedIndex = housingTypeSelect.selectedIndex;
 
-    var value = lodgingSelect.options[selectedIndex].value;
+    var value = housingTypeSelect.options[selectedIndex].value;
 
-    priceInput.placeholder = lodgingPrice[value];
-    priceInput.min = lodgingPrice[value];
+    priceInput.placeholder = housingPrice[value];
+    priceInput.min = housingPrice[value];
   });
 
   timein.addEventListener('change', function () {

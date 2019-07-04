@@ -10,7 +10,8 @@
   var onSuccess = function (data) {
     window.allPins = data;
 
-    window.appendAd(data.slice(0, 5));
+    window.appendAdPin(data.slice(0, 5));
+    window.appendAdText(data[0]);
 
     housingType.addEventListener('change', function () {
       window.data.reloadPins(housingType.options[housingType.selectedIndex].value);

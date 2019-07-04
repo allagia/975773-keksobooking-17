@@ -91,7 +91,7 @@
 
   var reloadPins = function (filter) {
     window.data.removePin();
-    window.appendAd(filterPins(filter).slice(0, 5));
+    window.appendAdPin(filterPins(filter).slice(0, 5));
   };
 
   var showErrorMessage = function (message) {

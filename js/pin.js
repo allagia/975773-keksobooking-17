@@ -1,12 +1,6 @@
 'use strict';
 
 (function () {
-  var housingTypeDict = {
-    flat: 'Квартира',
-    bungalo: 'Бунгало',
-    house: 'Дом',
-    palace: 'Дворец'
-  };
 
   var renderAdPin = function (ad) {
     var similarAddTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -16,6 +10,11 @@
     adElement.style.top = ad.location.y + 'px';
     adElement.querySelector('img').src = ad.author.avatar;
     adElement.querySelector('img').alt = ad.offer.title;
+
+    adElement.addEventListener('click', function () {
+      window.event.removeCard();
+      appendAdText(ad);
+    });
 
     return adElement;
   };
@@ -38,7 +37,7 @@
     element.querySelector('.popup__title').textContent = ad.offer.title;
     element.querySelector('.popup__text--address').textContent = ad.offer.address;
     element.querySelector('.popup__text--price').textContent = ad.offer.price + '₽/ночь';
-    element.querySelector('.popup__type').textContent = housingTypeDict[ad.offer.type];
+    element.querySelector('.popup__type').textContent = window.data.housingTypeDict[ad.offer.type];
     element.querySelector('.popup__text--capacity').textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
     element.querySelector('.popup__text--time').textContent = 'Заезд после ' + ad.offer.checkin + ',  выезд до ' + ad.offer.checkout;
     element.querySelector('.popup__features').innerHTML = window.field.renderFeatures(ad.offer.features);
@@ -49,6 +48,7 @@
     return element;
   };
 
+
   var appendAdText = function (ad) {
     var filtersContainer = document.querySelector('.map__filters-container');
     var fragment = document.createDocumentFragment();
@@ -56,10 +56,27 @@
     fragment.appendChild(renderAdText(ad));
 
     filtersContainer.before(fragment);
+
+    var closePopup = document.querySelector('.popup__close');
+
+    closePopup.addEventListener('click', function () {
+      window.event.removeCard();
+    });
+
+    window.addEventListener('keydown', window.event.onPopupEscPress);
+  };
+
+  var appendCards = function (array) {
+    var block = '';
+    array.forEach(function (arrayElement) {
+      block += window.pin.appendAdText(arrayElement);
+    });
+    return block;
   };
 
   window.pin = {
     appendAdPin: appendAdPin,
-    appendAdText: appendAdText
+    appendAdText: appendAdText,
+    appendCards: appendCards
   };
 })();

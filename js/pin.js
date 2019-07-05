@@ -20,7 +20,7 @@
     return adElement;
   };
 
-  window.appendAdPin = function (ads) {
+  var appendAdPin = function (ads) {
     var similarListElement = document.querySelector('.map__pins');
     var fragment = document.createDocumentFragment();
 
@@ -29,22 +29,6 @@
     }
 
     similarListElement.appendChild(fragment);
-  };
-
-  var renderFeatures = function (array) {
-    var element = '';
-    for (var i = 0; i < array.length; i++) {
-      element += '<li class="popup__feature popup__feature--' + array[i] + '"></li>';
-    }
-    return element;
-  };
-
-  var renderPhotos = function (array) {
-    var element = '';
-    for (var i = 0; i < array.length; i++) {
-      element += '<img src="' + array[i] + '" class="popup__photo" width="45" height="40" alt="Фотография жилья"></img>';
-    }
-    return element;
   };
 
   var renderAdText = function (ad) {
@@ -57,20 +41,25 @@
     element.querySelector('.popup__type').textContent = housingTypeDict[ad.offer.type];
     element.querySelector('.popup__text--capacity').textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
     element.querySelector('.popup__text--time').textContent = 'Заезд после ' + ad.offer.checkin + ',  выезд до ' + ad.offer.checkout;
-    element.querySelector('.popup__features').innerHTML = renderFeatures(ad.offer.features);
+    element.querySelector('.popup__features').innerHTML = window.field.renderFeatures(ad.offer.features);
     element.querySelector('.popup__description').textContent = ad.offer.description;
-    element.querySelector('.popup__photos').innerHTML = renderPhotos(ad.offer.photos);
+    element.querySelector('.popup__photos').innerHTML = window.field.renderPhotos(ad.offer.photos);
     element.querySelector('.popup__avatar').src = ad.author.avatar;
 
     return element;
   };
 
-  window.appendAdText = function (ad) {
+  var appendAdText = function (ad) {
     var filtersContainer = document.querySelector('.map__filters-container');
     var fragment = document.createDocumentFragment();
 
     fragment.appendChild(renderAdText(ad));
 
     filtersContainer.before(fragment);
+  };
+
+  window.pin = {
+    appendAdPin: appendAdPin,
+    appendAdText: appendAdText
   };
 })();

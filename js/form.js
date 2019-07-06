@@ -65,4 +65,23 @@
 
     timein.value = value;
   });
+
+  var roomNumber = document.querySelector('select[id = "room_number"]');
+  var roomCapacity = document.querySelector('select[id = "capacity"]');
+
+  var onRoomCapacityChange = function () {
+    var currentNumberValue = roomNumber.options[roomNumber.selectedIndex].value;
+    var currentCapacityValue = roomCapacity.options[roomCapacity.selectedIndex].value;
+    if ((currentNumberValue === '100' && currentCapacityValue !== '0') ||
+        (currentNumberValue !== '100' && currentCapacityValue === '0')) {
+      roomCapacity.setCustomValidity('Неподходящее число гостей');
+    } else if (currentCapacityValue > currentNumberValue) {
+      roomCapacity.setCustomValidity('Неподходящее число гостей');
+    } else {
+      roomCapacity.setCustomValidity('');
+    }
+  };
+
+  roomCapacity.addEventListener('change', onRoomCapacityChange);
+  roomNumber.addEventListener('change', onRoomCapacityChange);
 })();

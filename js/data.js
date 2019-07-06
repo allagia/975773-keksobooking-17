@@ -9,6 +9,13 @@
 
   window.allPins = [];
 
+  var housingTypeDict = {
+    flat: 'Квартира',
+    bungalo: 'Бунгало',
+    house: 'Дом',
+    palace: 'Дворец'
+  };
+
   var addDisabledAttribute = function () {
     adForm.querySelector('.ad-form-header').setAttribute('disabled', '');
 
@@ -108,6 +115,7 @@
     load: load,
     removePin: removePin,
     reloadPins: reloadPins,
-    showErrorMessage: showErrorMessage
+    showErrorMessage: showErrorMessage,
+    housingTypeDict: housingTypeDict
   };
 })();

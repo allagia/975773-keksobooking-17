@@ -84,4 +84,8 @@
 
   roomCapacity.addEventListener('change', onRoomCapacityChange);
   roomNumber.addEventListener('change', onRoomCapacityChange);
+
+  window.form = {
+    setAddress: setAddress
+  };
 })();

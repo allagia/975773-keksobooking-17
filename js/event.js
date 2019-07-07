@@ -10,12 +10,18 @@
     }
   };
 
+  // var removeMessage = function (message) {
+  //   var mainBlock = document.querySelector('main');
+  //   mainBlock.appendChild(message);
+  // };
 
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
       removeCard();
     }
   };
+
+  // window.addEventListener('click', removeMessage);
 
   window.event = {
     removeCard: removeCard,

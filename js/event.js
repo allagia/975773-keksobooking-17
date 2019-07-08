@@ -2,30 +2,47 @@
 (function () {
   var ESC_KEYCODE = 27;
 
-  var removeCard = function () {
-    var parent = document.querySelector('.map');
-    var child = parent.querySelector('article');
+  var removeChild = function (parentClass, childClass) {
+    var parent = document.querySelector(parentClass);
+    var child = parent.querySelector(childClass);
     if (child) {
       parent.removeChild(child);
     }
   };
 
-  // var removeMessage = function (message) {
-  //   var mainBlock = document.querySelector('main');
-  //   mainBlock.appendChild(message);
-  // };
+
+  /* нужно ли объединять 3 последующие функции в одну с 3 переменными (пример ниже)? Или как записать проще?
+
+  // var onPopupEscPress = function (evt, parentClass, childClass) {
+  //   if (evt.keyCode === ESC_KEYCODE) {
+  //     removeChild(parentClass, childClass);
+  //   }
+  // };*/
 
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
-      removeCard();
+      removeChild('.map', 'arcitle');
     }
   };
 
-  // window.addEventListener('click', removeMessage);
+  var onSuccessEscPress = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      removeChild('main', '.success');
+    }
+  };
+
+  var onErrorEscPress = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      removeChild('main', '.error');
+    }
+  };
+
 
   window.event = {
-    removeCard: removeCard,
-    onPopupEscPress: onPopupEscPress
+    removeChild: removeChild,
+    onPopupEscPress: onPopupEscPress,
+    onSuccessEscPress: onSuccessEscPress,
+    onErrorEscPress: onErrorEscPress
   };
 
 })();

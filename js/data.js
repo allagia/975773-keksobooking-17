@@ -101,7 +101,6 @@
 
     xhr.timeout = 10000;
 
-
     xhr.open('POST', URL);
     xhr.send(data);
   };
@@ -139,7 +138,7 @@
     mainBlock.appendChild(message);
   };
 
-  var showOnSuccessMessage = function (message) {
+  var showSuccessMessage = function (message) {
     var successTemplate = document.querySelector('#success').content.querySelector('.success');
     var mainBlock = document.querySelector('main');
 
@@ -155,7 +154,7 @@
     removePin: removePin,
     reloadPins: reloadPins,
     showErrorMessage: showErrorMessage,
-    showOnSuccessMessage: showOnSuccessMessage,
+    showSuccessMessage: showSuccessMessage,
     housingTypeDict: housingTypeDict,
     addDisabledAttribute: addDisabledAttribute
   };

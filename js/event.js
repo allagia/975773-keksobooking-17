@@ -2,24 +2,24 @@
 (function () {
   var ESC_KEYCODE = 27;
 
-  var removeCard = function () {
-    var parent = document.querySelector('.map');
-    var child = parent.querySelector('article');
+  var removeChild = function (parentClass, childClass) {
+    var parent = document.querySelector(parentClass);
+    var child = parent.querySelector(childClass);
     if (child) {
       parent.removeChild(child);
     }
   };
 
-
-  var onPopupEscPress = function (evt) {
+  var onPopupEscPress = function (evt, childClass, parentClass) {
+    var defaultParentClass = 'main';
     if (evt.keyCode === ESC_KEYCODE) {
-      removeCard();
+      removeChild(parentClass || defaultParentClass, childClass);
     }
   };
 
   window.event = {
-    removeCard: removeCard,
-    onPopupEscPress: onPopupEscPress
+    onPopupEscPress: onPopupEscPress,
+    removeChild: removeChild
   };
 
 })();

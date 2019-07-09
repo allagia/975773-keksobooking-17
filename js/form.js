@@ -66,8 +66,8 @@
     timein.value = value;
   });
 
-  var roomNumber = document.querySelector('select[id = "room_number"]');
-  var roomCapacity = document.querySelector('select[id = "capacity"]');
+  var roomNumber = document.querySelector('#room_number');
+  var roomCapacity = document.querySelector('#capacity');
 
   var onRoomCapacityChange = function () {
     var currentNumberValue = roomNumber.options[roomNumber.selectedIndex].value;
@@ -84,4 +84,8 @@
 
   roomCapacity.addEventListener('change', onRoomCapacityChange);
   roomNumber.addEventListener('change', onRoomCapacityChange);
+
+  window.form = {
+    setAddress: setAddress
+  };
 })();

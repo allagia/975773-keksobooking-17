@@ -12,7 +12,7 @@
     adElement.querySelector('img').alt = ad.offer.title;
 
     adElement.addEventListener('click', function () {
-      window.event.removeCard();
+      window.event.removeChild('.map', 'article');
       appendAdText(ad);
     });
 
@@ -60,10 +60,12 @@
     var closePopup = document.querySelector('.popup__close');
 
     closePopup.addEventListener('click', function () {
-      window.event.removeCard();
+      window.event.removeChild('.map', 'article');
     });
 
-    window.addEventListener('keydown', window.event.onPopupEscPress);
+    window.addEventListener('keydown', function (evt) {
+      window.event.onPopupEscPress(evt, 'article', '.map');
+    });
   };
 
   var appendCards = function (array) {

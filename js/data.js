@@ -50,72 +50,9 @@
     return ads;
   };
 
-  var load = function (url, onSuccess, onError) {
-    var xhr = new XMLHttpRequest();
-
-    xhr.responseType = 'json';
-
-    xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
-        onSuccess(xhr.response);
-      } else {
-        onError('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);
-      }
-    });
-
-    xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соединения');
-    });
-
-    xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
-    });
-
-    xhr.timeout = 10000;
-
-    xhr.open('GET', url);
-    xhr.send();
-  };
-
-  var removePin = function () {
-    var mapPins = document.querySelector('.map__pins');
-    var pins = mapPins.querySelectorAll('button.map__pin:not(.map__pin--main)');
-
-    var pinsArray = Array.from(pins);
-
-    pinsArray.forEach(function (element) {
-      mapPins.removeChild(element);
-    });
-  };
-
-  var filterPins = function (filter) {
-    return filter === 'any'
-      ? window.allPins
-      : window.allPins.filter(function (pin) {
-        return pin.offer.type === filter;
-      });
-  };
-
-  var reloadPins = function (filter) {
-    window.data.removePin();
-    window.pin.appendAdPin(filterPins(filter).slice(0, 5));
-  };
-
-  var showErrorMessage = function (message) {
-    var errorTemplate = document.querySelector('#error').content.querySelector('.error');
-    var mainBlock = document.querySelector('main');
-
-    message = errorTemplate.cloneNode(true);
-
-    mainBlock.appendChild(message);
-  };
-
   window.data = {
+    addDisabledAttribute: addDisabledAttribute,
     getAdsArray: getAdsArray,
-    load: load,
-    removePin: removePin,
-    reloadPins: reloadPins,
-    showErrorMessage: showErrorMessage,
     housingTypeDict: housingTypeDict
   };
 })();

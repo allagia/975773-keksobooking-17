@@ -17,19 +17,20 @@
     adForm.classList.add('ad-form--disabled');
     window.data.addDisabledAttribute();
     window.event.removeChild('.map', 'article');
-    window.data.removePin();
+    window.pinManage.removePin();
     window.pin.appendAdPin(window.allPins.slice(0, 5));
-    window.data.showSuccessMessage();
+    window.message.showSuccessMessage();
 
     window.addEventListener('click', function () {
       window.event.removeChild('main', '.success');
     });
-    window.addEventListener('keydown', window.event.onSuccessEscPress);
-
+    window.addEventListener('keydown', function (evt) {
+      window.event.onPopupEscPress(evt, '.success');
+    });
   };
 
   var onError = function () {
-    window.data.showErrorMessage();
+    window.message.showErrorMessage();
 
     var errorButton = document.querySelector('.error__button');
     errorButton.addEventListener('click', function () {
@@ -39,11 +40,13 @@
     window.addEventListener('click', function () {
       window.event.removeChild('main', '.error');
     });
-    window.addEventListener('keydown', window.event.onErrorEscPress);
+    window.addEventListener('keydown', function (evt) {
+      window.event.onPopupEscPress(evt, '.error');
+    });
   };
 
   adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.data.upload(new FormData(adForm), onSuccess, onError);
+    window.exchange.upload(new FormData(adForm), onSuccess, onError);
   });
 })();

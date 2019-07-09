@@ -10,39 +10,16 @@
     }
   };
 
-
-  /* нужно ли объединять 3 последующие функции в одну с 3 переменными (пример ниже)? Или как записать проще?
-
-  // var onPopupEscPress = function (evt, parentClass, childClass) {
-  //   if (evt.keyCode === ESC_KEYCODE) {
-  //     removeChild(parentClass, childClass);
-  //   }
-  // };*/
-
-  var onPopupEscPress = function (evt) {
+  var onPopupEscPress = function (evt, childClass, parentClass) {
+    var defaultParentClass = 'main';
     if (evt.keyCode === ESC_KEYCODE) {
-      removeChild('.map', 'arcitle');
+      removeChild(parentClass || defaultParentClass, childClass);
     }
   };
-
-  var onSuccessEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
-      removeChild('main', '.success');
-    }
-  };
-
-  var onErrorEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
-      removeChild('main', '.error');
-    }
-  };
-
 
   window.event = {
-    removeChild: removeChild,
     onPopupEscPress: onPopupEscPress,
-    onSuccessEscPress: onSuccessEscPress,
-    onErrorEscPress: onErrorEscPress
+    removeChild: removeChild
   };
 
 })();

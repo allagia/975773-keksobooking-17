@@ -68,17 +68,18 @@
     });
   };
 
-  var appendCards = function (array) {
-    var block = '';
-    array.forEach(function (arrayElement) {
-      block += window.pin.appendAdText(arrayElement);
-    });
-    return block;
-  };
+  /* проверить. кажется не используется*/
+  // var appendCards = function (array) {
+  //   var block = '';
+  //   array.forEach(function (arrayElement) {
+  //     block += window.pin.appendAdText(arrayElement);
+  //   });
+  //   return block;
+  // };
 
   window.pin = {
     appendAdPin: appendAdPin,
     appendAdText: appendAdText,
-    appendCards: appendCards
+    // appendCards: appendCards
   };
 })();

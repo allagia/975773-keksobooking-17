@@ -101,7 +101,6 @@
 
   window.pinManage = {
     reloadPins: reloadPins,
-    // removeCard: removeCard,
     removePin: removePin
   };
 })();

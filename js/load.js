@@ -1,7 +1,7 @@
 'use strict';
 (function () {
-  var mapFilters = document.querySelector('.map__filters');
-  var housingType = mapFilters.querySelector('select[name = housing-type]');
+  var mapFilter = document.querySelectorAll('.map__filter');
+  var checkbox = document.querySelectorAll('.map__checkbox');
 
   var onError = function () {
     window.message.showErrorMessage();
@@ -12,8 +12,16 @@
 
     window.pin.appendAdPin(data.slice(0, 5));
 
-    housingType.addEventListener('change', function () {
-      window.pinManage.reloadPins(housingType.options[housingType.selectedIndex].value);
+    var onFilterChange = window.debounce(function () {
+      window.pinManage.reloadPins();
+    });
+
+    mapFilter.forEach(function (element) {
+      element.addEventListener('change', onFilterChange);
+    });
+
+    checkbox.forEach(function (element) {
+      element.addEventListener('click', onFilterChange);
     });
   };
 

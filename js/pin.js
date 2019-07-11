@@ -14,6 +14,11 @@
     adElement.addEventListener('click', function () {
       window.event.removeChild('.map', 'article');
       appendAdText(ad);
+      adElement.classList.add('map__pin--active');
+    });
+
+    adElement.addEventListener('blur', function () {
+      adElement.classList.remove('map__pin--active');
     });
 
     return adElement;

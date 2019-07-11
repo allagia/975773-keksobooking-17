@@ -5,10 +5,12 @@
   var pageMap = document.querySelector('.map');
   var mainPin = document.querySelector('.map__pin--main');
   var formReset = document.querySelector('.ad-form__reset');
+  var mapFilters = document.querySelector('.map__filters');
 
   var onSuccess = function () {
 
     adForm.reset();
+    mapFilters.reset();
     mainPin.style.left = '570px';
     mainPin.style.top = '375px';
     window.form.setAddress();
@@ -54,6 +56,7 @@
 
   formReset.addEventListener('click', function () {
     adForm.reset();
+    mapFilters.reset();
     mainPin.style.left = '570px';
     mainPin.style.top = '375px';
     window.form.setAddress();

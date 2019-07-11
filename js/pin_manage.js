@@ -13,19 +13,22 @@
     });
   };
 
+  var filterPriceCb = {
+    low: function (pin) {
+      return pin.offer.price < 10000;
+    },
+    middle: function (pin) {
+      return pin.offer.price >= 10000 && pin.offer.price < 50000;
+    },
+    high: function (pin) {
+      return pin.offer.price >= 50000;
+    }
+  };
+
   var filterByPrice = function (data, filter) {
     return filter === 'any'
       ? data
-      : data.filter(function (pin) {
-        if (filter === 'low') {
-          var result = pin.offer.price < 10000;
-        } else if (filter === 'middle') {
-          result = pin.offer.price >= 10000 && pin.offer.price < 50000;
-        } else if (filter === 'high') {
-          result = pin.offer.price >= 50000;
-        }
-        return result;
-      });
+      : data.filter(filterPriceCb[filter]);
   };
 
   var filterByRooms = function (data, filter) {
@@ -81,6 +84,7 @@
     window.pinManage.removePin();
 
     var data = window.allPins;
+
     data = filterByType(data, housingType.options[housingType.selectedIndex].value);
     data = filterByRooms(data, housingRooms.options[housingRooms.selectedIndex].value);
     data = filterByGuests(data, housingGuests.options[housingGuests.selectedIndex].value);
@@ -95,10 +99,8 @@
     window.pin.appendAdPin(data.slice(0, 5));
   };
 
-
   window.pinManage = {
     reloadPins: reloadPins,
     removePin: removePin
   };
-
 })();

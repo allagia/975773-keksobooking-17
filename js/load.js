@@ -12,16 +12,16 @@
 
     window.pin.appendAdPin(data.slice(0, 5));
 
+    var onFilterChange = window.debounce(function () {
+      window.pinManage.reloadPins();
+    });
+
     mapFilter.forEach(function (element) {
-      element.addEventListener('change', window.debounce(function () {
-        window.pinManage.reloadPins();
-      }));
+      element.addEventListener('change', onFilterChange);
     });
 
     checkbox.forEach(function (element) {
-      element.addEventListener('click', window.debounce(function () {
-        window.pinManage.reloadPins();
-      }));
+      element.addEventListener('click', onFilterChange);
     });
   };
 

@@ -6,6 +6,8 @@
   var adForm = document.querySelector('.ad-form');
   var apartmentTypes = ['palace', 'flat', 'house', 'bungalo'];
   var adFormElements = adForm.querySelectorAll('.ad-form__element');
+  var mapFilters = document.querySelectorAll('.map__filter');
+  var mapFeatures = document.querySelector('.map__features');
 
   window.allPins = [];
 
@@ -22,6 +24,12 @@
     adFormElements.forEach(function (element) {
       element.setAttribute('disabled', '');
     });
+
+    mapFilters.forEach(function (element) {
+      element.setAttribute('disabled', '');
+    });
+
+    mapFeatures.setAttribute('disabled', '');
   };
   addDisabledAttribute();
 

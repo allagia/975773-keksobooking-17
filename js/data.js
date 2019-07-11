@@ -11,7 +11,7 @@
 
   window.allPins = [];
 
-  var housingTypeDict = {
+  var HousingType = {
     flat: 'Квартира',
     bungalo: 'Бунгало',
     house: 'Дом',
@@ -33,7 +33,7 @@
   };
   addDisabledAttribute();
 
-  var randomInteger = function (min, max) {
+  var getRandomInteger = function (min, max) {
     return Math.floor(min + Math.random() * (max + 1 - min));
   };
 
@@ -46,11 +46,11 @@
               avatar: 'img/avatars/user' + '0' + i + '.png'
             },
             offer: {
-              type: apartmentTypes[randomInteger(0, 4)]
+              type: apartmentTypes[getRandomInteger(0, 4)]
             },
             location: {
-              x: randomInteger(25, 1175) - PIN_WIDTH / 2,
-              y: randomInteger(130 + PIN_HEIGHT, 631) - PIN_HEIGHT
+              x: getRandomInteger(25, 1175) - PIN_WIDTH / 2,
+              y: getRandomInteger(130 + PIN_HEIGHT, 631) - PIN_HEIGHT
             }
           }
       );
@@ -61,6 +61,6 @@
   window.data = {
     addDisabledAttribute: addDisabledAttribute,
     getAdsArray: getAdsArray,
-    housingTypeDict: housingTypeDict
+    HousingType: HousingType
   };
 })();

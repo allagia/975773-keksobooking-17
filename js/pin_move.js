@@ -10,7 +10,7 @@
   var mapFilters = document.querySelectorAll('.map__filter');
   var mapFeatures = document.querySelector('.map__features');
 
-  var deleteDisabledttribute = function () {
+  var deleteDisabledAttribute = function () {
     adForm.querySelector('.ad-form-header').removeAttribute('disabled', '');
 
     adFormElements.forEach(function (element) {
@@ -74,7 +74,7 @@
 
       pageMap.classList.remove('map--faded');
       adForm.classList.remove('ad-form--disabled');
-      deleteDisabledttribute();
+      deleteDisabledAttribute();
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);

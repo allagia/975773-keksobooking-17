@@ -34,6 +34,7 @@
     window.message.showErrorMessage();
 
     var errorButton = document.querySelector('.error__button');
+
     errorButton.addEventListener('click', function () {
       window.event.removeChild('main', '.error');
     });

@@ -55,7 +55,6 @@
       });
   };
 
-
   var isElementExist = function (arr, elem) {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i] === elem) {
@@ -82,6 +81,7 @@
     var featureArray = Array.from(featureInput);
 
     window.pinManage.removePin();
+    window.event.removeChild('.map', '.map__card');
 
     var data = window.allPins;
 
@@ -101,6 +101,7 @@
 
   window.pinManage = {
     reloadPins: reloadPins,
+    // removeCard: removeCard,
     removePin: removePin
   };
 })();

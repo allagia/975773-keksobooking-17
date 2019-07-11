@@ -32,7 +32,7 @@
     setAddress(true);
   });
 
-  var housingPrice = {
+  var HousingPrice = {
     bungalo: 0,
     flat: 1000,
     house: 5000,
@@ -50,8 +50,8 @@
 
     var value = housingTypeSelect.options[selectedIndex].value;
 
-    priceInput.placeholder = housingPrice[value];
-    priceInput.min = housingPrice[value];
+    priceInput.placeholder = HousingPrice[value];
+    priceInput.min = HousingPrice[value];
   });
 
   timein.addEventListener('change', function () {

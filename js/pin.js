@@ -14,6 +14,11 @@
     adElement.addEventListener('click', function () {
       window.event.removeChild('.map', 'article');
       appendAdText(ad);
+      adElement.classList.add('map__pin--active');
+    });
+
+    adElement.addEventListener('blur', function () {
+      adElement.classList.remove('map__pin--active');
     });
 
     return adElement;
@@ -37,7 +42,7 @@
     element.querySelector('.popup__title').textContent = ad.offer.title;
     element.querySelector('.popup__text--address').textContent = ad.offer.address;
     element.querySelector('.popup__text--price').textContent = ad.offer.price + '₽/ночь';
-    element.querySelector('.popup__type').textContent = window.data.housingTypeDict[ad.offer.type];
+    element.querySelector('.popup__type').textContent = window.data.HousingType[ad.offer.type];
     element.querySelector('.popup__text--capacity').textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
     element.querySelector('.popup__text--time').textContent = 'Заезд после ' + ad.offer.checkin + ',  выезд до ' + ad.offer.checkout;
     element.querySelector('.popup__features').innerHTML = window.field.renderFeatures(ad.offer.features);

@@ -7,13 +7,21 @@
   var pageMap = document.querySelector('.map');
   var adFormElements = adForm.querySelectorAll('.ad-form__element');
   var pinsArea = document.querySelector('.map__pins');
+  var mapFilters = document.querySelectorAll('.map__filter');
+  var mapFeatures = document.querySelector('.map__features');
 
-  var deleteDisabledttribute = function () {
+  var deleteDisabledAttribute = function () {
     adForm.querySelector('.ad-form-header').removeAttribute('disabled', '');
 
     adFormElements.forEach(function (element) {
       element.removeAttribute('disabled', '');
     });
+
+    mapFilters.forEach(function (element) {
+      element.removeAttribute('disabled', '');
+    });
+
+    mapFeatures.removeAttribute('disabled', '');
   };
 
   var parentPosition = pinsArea.getBoundingClientRect();
@@ -66,7 +74,7 @@
 
       pageMap.classList.remove('map--faded');
       adForm.classList.remove('ad-form--disabled');
-      deleteDisabledttribute();
+      deleteDisabledAttribute();
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);

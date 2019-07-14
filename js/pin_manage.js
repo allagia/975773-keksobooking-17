@@ -2,6 +2,11 @@
 
 (function () {
 
+  var Limits = {
+    FROM_NUMBER: 0,
+    TO_NUMBER: 5
+  };
+
   var removePin = function () {
     var mapPins = document.querySelector('.map__pins');
     var pins = mapPins.querySelectorAll('button.map__pin:not(.map__pin--main)');
@@ -80,8 +85,8 @@
     var featureInput = mapFilters.querySelectorAll('input[type = "checkbox"]');
     var featureArray = Array.from(featureInput);
 
-    window.pinManage.removePin();
-    window.event.removeChild('.map', '.map__card');
+    window.pinManage.remove();
+    window.handler.removeChild('.map', '.map__card');
 
     var data = window.allPins;
 
@@ -96,11 +101,12 @@
       }
     });
 
-    window.pin.appendAdPin(data.slice(0, 5));
+    window.pin.appendAd(data.slice(window.pinManage.limits.FROM_NUMBER, window.pinManage.limits.TO_NUMBER));
   };
 
   window.pinManage = {
-    reloadPins: reloadPins,
-    removePin: removePin
+    limits: Limits,
+    reload: reloadPins,
+    remove: removePin
   };
 })();

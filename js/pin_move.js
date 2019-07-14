@@ -2,36 +2,39 @@
 
 (function () {
   var MAIN_PIN_WIDTH = 65;
+  var Y_MAX_VALUE = 630;
+  var Y_MIN_VALUE = 130;
   var mainPin = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
   var pageMap = document.querySelector('.map');
-  var adFormElements = adForm.querySelectorAll('.ad-form__element');
+  var adFormFields = adForm.querySelectorAll('.ad-form__element');
   var pinsArea = document.querySelector('.map__pins');
   var mapFilters = document.querySelectorAll('.map__filter');
   var mapFeatures = document.querySelector('.map__features');
 
   var deleteDisabledAttribute = function () {
-    adForm.querySelector('.ad-form-header').removeAttribute('disabled', '');
+    adForm.querySelector('.ad-form-header').removeAttribute('disabled');
 
-    adFormElements.forEach(function (element) {
-      element.removeAttribute('disabled', '');
+    adFormFields.forEach(function (element) {
+      element.removeAttribute('disabled');
     });
 
     mapFilters.forEach(function (element) {
-      element.removeAttribute('disabled', '');
+      element.removeAttribute('disabled');
     });
 
-    mapFeatures.removeAttribute('disabled', '');
+    mapFeatures.removeAttribute('disabled');
   };
 
   var parentPosition = pinsArea.getBoundingClientRect();
   var parentMaxWidth = Math.round(parentPosition.width);
+
   var parentMinWidth = 0;
 
   mainPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
-    var startCoords = {
+    var startCoordinates = {
       x: evt.clientX,
       y: evt.clientY
     };
@@ -40,31 +43,31 @@
       moveEvt.preventDefault();
 
       var shift = {
-        x: startCoords.x - moveEvt.clientX,
-        y: startCoords.y - moveEvt.clientY
+        x: startCoordinates.x - moveEvt.clientX,
+        y: startCoordinates.y - moveEvt.clientY
       };
 
-      startCoords = {
+      startCoordinates = {
         x: moveEvt.clientX,
         y: moveEvt.clientY
       };
 
-      var topCoord = mainPin.offsetTop - shift.y;
-      var leftCoord = mainPin.offsetLeft - shift.x;
+      var topCoordinate = mainPin.offsetTop - shift.y;
+      var leftCoordinate = mainPin.offsetLeft - shift.x;
 
-      if (topCoord >= 130 && topCoord <= 630) {
-        mainPin.style.top = topCoord + 'px';
-      } else if (topCoord < 130) {
-        mainPin.style.top = 130 + 'px';
-      } else if (topCoord > 630) {
-        mainPin.style.top = 630 + 'px';
+      if (topCoordinate >= Y_MIN_VALUE && topCoordinate <= Y_MAX_VALUE) {
+        mainPin.style.top = topCoordinate + 'px';
+      } else if (topCoordinate < Y_MIN_VALUE) {
+        mainPin.style.top = Y_MIN_VALUE + 'px';
+      } else if (topCoordinate > Y_MAX_VALUE) {
+        mainPin.style.top = Y_MAX_VALUE + 'px';
       }
 
-      if ((leftCoord >= parentMinWidth) && (leftCoord <= parentMaxWidth - MAIN_PIN_WIDTH)) {
-        mainPin.style.left = leftCoord + 'px';
-      } else if (leftCoord < parentMinWidth) {
+      if ((leftCoordinate >= parentMinWidth) && (leftCoordinate <= parentMaxWidth - MAIN_PIN_WIDTH)) {
+        mainPin.style.left = leftCoordinate + 'px';
+      } else if (leftCoordinate < parentMinWidth) {
         mainPin.style.left = parentMinWidth + 'px';
-      } else if (leftCoord > parentMaxWidth - MAIN_PIN_WIDTH) {
+      } else if (leftCoordinate > parentMaxWidth - MAIN_PIN_WIDTH) {
         mainPin.style.left = parentMaxWidth - MAIN_PIN_WIDTH + 'px';
       }
     };

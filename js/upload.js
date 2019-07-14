@@ -19,33 +19,33 @@
     pageMap.classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
     window.data.addDisabledAttribute();
-    window.event.removeChild('.map', 'article');
-    window.pinManage.removePin();
-    window.pin.appendAdPin(window.allPins.slice(0, 5));
-    window.message.showSuccessMessage();
+    window.handler.removeChild('.map', 'article');
+    window.pinManage.remove();
+    window.pin.appendAd(window.allPins.slice(window.pinManage.limits.FROM_NUMBER, window.pinManage.limits.TO_NUMBER));
+    window.message.showSuccess();
 
     window.addEventListener('click', function () {
-      window.event.removeChild('main', '.success');
+      window.handler.removeChild('main', '.success');
     });
     window.addEventListener('keydown', function (evt) {
-      window.event.onPopupEscPress(evt, '.success');
+      window.handler.onPopupEscPress(evt, '.success');
     });
   };
 
   var onError = function () {
-    window.message.showErrorMessage();
+    window.message.showError();
 
     var errorButton = document.querySelector('.error__button');
 
     errorButton.addEventListener('click', function () {
-      window.event.removeChild('main', '.error');
+      window.handler.removeChild('main', '.error');
     });
 
     window.addEventListener('click', function () {
-      window.event.removeChild('main', '.error');
+      window.handler.removeChild('main', '.error');
     });
     window.addEventListener('keydown', function (evt) {
-      window.event.onPopupEscPress(evt, '.error');
+      window.handler.onPopupEscPress(evt, '.error');
     });
   };
 
@@ -65,8 +65,8 @@
     pageMap.classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
     window.data.addDisabledAttribute();
-    window.event.removeChild('.map', 'article');
-    window.pinManage.removePin();
-    window.pin.appendAdPin(window.allPins.slice(0, 5));
+    window.handler.removeChild('.map', 'article');
+    window.pinManage.remove();
+    window.pin.appendAd(window.allPins.slice(window.pinManage.limits.FROM_NUMBER, window.pinManage.limits.TO_NUMBER));
   });
 })();

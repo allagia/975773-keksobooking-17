@@ -12,10 +12,7 @@
     var coordinateY = mainPin.style.top;
     coordinateY = coordinateY.substring(0, coordinateY.length - 2);
 
-    var x = Number(coordinateX);
-    var y = Number(coordinateY);
-
-    inputAddress.value = x + ', ' + y;
+    inputAddress.value = coordinateX + ', ' + coordinateY;
   };
 
   setAddress();

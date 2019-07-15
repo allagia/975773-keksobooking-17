@@ -1,27 +1,24 @@
 'use strict';
 
 (function () {
-  var PIN_WIDTH = 50;
-  var PIN_HEIGHT = 70;
   var adForm = document.querySelector('.ad-form');
-  var apartmentTypes = ['palace', 'flat', 'house', 'bungalo'];
-  var adFormElements = adForm.querySelectorAll('.ad-form__element');
+  var adFormFields = adForm.querySelectorAll('.ad-form__element');
   var mapFilters = document.querySelectorAll('.map__filter');
   var mapFeatures = document.querySelector('.map__features');
 
   window.allPins = [];
 
   var HousingType = {
-    flat: 'Квартира',
-    bungalo: 'Бунгало',
-    house: 'Дом',
-    palace: 'Дворец'
+    FLAT: 'Квартира',
+    BUNGALO: 'Бунгало',
+    HOUSE: 'Дом',
+    PALACE: 'Дворец'
   };
 
   var addDisabledAttribute = function () {
     adForm.querySelector('.ad-form-header').setAttribute('disabled', '');
 
-    adFormElements.forEach(function (element) {
+    adFormFields.forEach(function (element) {
       element.setAttribute('disabled', '');
     });
 
@@ -33,34 +30,8 @@
   };
   addDisabledAttribute();
 
-  var getRandomInteger = function (min, max) {
-    return Math.floor(min + Math.random() * (max + 1 - min));
-  };
-
-  var getAdsArray = function (numberOfAds) {
-    var ads = [];
-    for (var i = 1; i <= numberOfAds; i++) {
-      ads.push(
-          {
-            author: {
-              avatar: 'img/avatars/user' + '0' + i + '.png'
-            },
-            offer: {
-              type: apartmentTypes[getRandomInteger(0, 4)]
-            },
-            location: {
-              x: getRandomInteger(25, 1175) - PIN_WIDTH / 2,
-              y: getRandomInteger(130 + PIN_HEIGHT, 631) - PIN_HEIGHT
-            }
-          }
-      );
-    }
-    return ads;
-  };
-
   window.data = {
     addDisabledAttribute: addDisabledAttribute,
-    getAdsArray: getAdsArray,
     HousingType: HousingType
   };
 })();

@@ -4,16 +4,16 @@
   var checkbox = document.querySelectorAll('.map__checkbox');
 
   var onError = function () {
-    window.message.showErrorMessage();
+    window.message.showError();
   };
 
   var onSuccess = function (data) {
     window.allPins = data;
 
-    window.pin.appendAdPin(data.slice(0, 5));
+    window.pin.appendAd(data.slice(window.pinManage.limits.FROM_NUMBER, window.pinManage.limits.TO_NUMBER));
 
     var onFilterChange = window.debounce(function () {
-      window.pinManage.reloadPins();
+      window.pinManage.reload();
     });
 
     mapFilter.forEach(function (element) {

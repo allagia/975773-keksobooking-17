@@ -68,9 +68,12 @@
       window.handler.removeChild('.map', 'article');
     });
 
-    window.addEventListener('keydown', function (evt) {
+    var onEscPress = function (evt) {
       window.handler.onPopupEscPress(evt, 'article', '.map');
-    });
+      window.removeEventListener('keydown', onEscPress);
+    };
+
+    window.addEventListener('keydown', onEscPress);
   };
 
 

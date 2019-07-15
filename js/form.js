@@ -17,9 +17,7 @@
 
   setAddress();
 
-  document.addEventListener('mouseup', function () {
-    setAddress();
-  });
+  document.addEventListener('mouseup', setAddress);
 
   var HousingPrice = {
     BUNGALO: 0,

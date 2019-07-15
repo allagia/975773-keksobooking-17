@@ -9,18 +9,26 @@
 
   var onSuccessClick = function () {
     window.handler.removeChild('main', '.success');
+    window.removeEventListener('click', onSuccessClick);
+    window.removeEventListener('keydown', onEscSuccessPress);
   };
 
   var onEscSuccessPress = function (evt) {
     window.handler.onPopupEscPress(evt, '.success');
+    window.removeEventListener('click', onSuccessClick);
+    window.removeEventListener('keydown', onEscSuccessPress);
   };
 
   var onErrorClick = function () {
     window.handler.removeChild('main', '.error');
+    window.removeEventListener('click', onErrorClick);
+    window.removeEventListener('keydown', onEscPress);
   };
 
   var onEscPress = function (evt) {
     window.handler.onPopupEscPress(evt, '.error');
+    window.removeEventListener('click', onErrorClick);
+    window.removeEventListener('keydown', onEscPress);
   };
 
   var onSuccess = function () {
@@ -55,7 +63,6 @@
     });
 
     window.addEventListener('click', onErrorClick);
-
     window.addEventListener('keydown', onEscPress);
   };
 
@@ -79,9 +86,4 @@
     window.pinManage.remove();
     window.pin.appendAd(window.allPins.slice(window.pinManage.limits.FROM_NUMBER, window.pinManage.limits.TO_NUMBER));
   });
-
-  window.removeEventListener('click', onErrorClick);
-  window.removeEventListener('keydown', onEscPress);
-  window.removeEventListener('click', onSuccessClick);
-  window.removeEventListener('keydown', onEscSuccessPress);
 })();

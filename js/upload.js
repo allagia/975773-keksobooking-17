@@ -45,6 +45,8 @@
     window.data.addDisabledAttribute();
     window.handler.removeChild('.map', 'article');
     window.pinManage.remove();
+    window.photo.remove();
+    window.avatar.remove();
     window.pin.appendAd(window.allPins.slice(window.pinManage.limits.FROM_NUMBER, window.pinManage.limits.TO_NUMBER));
     window.message.showSuccess();
 
@@ -84,6 +86,8 @@
     window.data.addDisabledAttribute();
     window.handler.removeChild('.map', 'article');
     window.pinManage.remove();
+    window.photo.remove();
+    window.avatar.remove();
     window.pin.appendAd(window.allPins.slice(window.pinManage.limits.FROM_NUMBER, window.pinManage.limits.TO_NUMBER));
   });
 })();

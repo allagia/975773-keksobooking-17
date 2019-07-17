@@ -12,6 +12,7 @@
     adPin.querySelector('img').alt = ad.offer.title;
 
     adPin.addEventListener('click', function () {
+      window.removeEventListener('keydown', onEscPress);
       window.handler.removeChild('.map', 'article');
       appendAdText(ad);
       adPin.classList.add('map__pin--active');
@@ -53,6 +54,10 @@
     return popup;
   };
 
+  var onEscPress = function (evt) {
+    window.handler.onPopupEscPress(evt, 'article', '.map');
+    window.removeEventListener('keydown', onEscPress);
+  };
 
   var appendAdText = function (ad) {
     var filtersContainer = document.querySelector('.map__filters-container');
@@ -66,11 +71,10 @@
 
     closePopup.addEventListener('click', function () {
       window.handler.removeChild('.map', 'article');
+      window.removeEventListener('keydown', onEscPress);
     });
 
-    window.addEventListener('keydown', function (evt) {
-      window.handler.onPopupEscPress(evt, 'article', '.map');
-    });
+    window.addEventListener('keydown', onEscPress);
   };
 
 

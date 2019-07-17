@@ -7,6 +7,30 @@
   var formReset = document.querySelector('.ad-form__reset');
   var mapFilters = document.querySelector('.map__filters');
 
+  var onSuccessClick = function () {
+    window.handler.removeChild('main', '.success');
+    window.removeEventListener('click', onSuccessClick);
+    window.removeEventListener('keydown', onEscSuccessPress);
+  };
+
+  var onEscSuccessPress = function (evt) {
+    window.handler.onPopupEscPress(evt, '.success');
+    window.removeEventListener('click', onSuccessClick);
+    window.removeEventListener('keydown', onEscSuccessPress);
+  };
+
+  var onErrorClick = function () {
+    window.handler.removeChild('main', '.error');
+    window.removeEventListener('click', onErrorClick);
+    window.removeEventListener('keydown', onEscPress);
+  };
+
+  var onEscPress = function (evt) {
+    window.handler.onPopupEscPress(evt, '.error');
+    window.removeEventListener('click', onErrorClick);
+    window.removeEventListener('keydown', onEscPress);
+  };
+
   var onSuccess = function () {
 
     adForm.reset();
@@ -24,13 +48,10 @@
     window.pin.appendAd(window.allPins.slice(window.pinManage.limits.FROM_NUMBER, window.pinManage.limits.TO_NUMBER));
     window.message.showSuccess();
 
-    window.addEventListener('click', function () {
-      window.handler.removeChild('main', '.success');
-    });
-    window.addEventListener('keydown', function (evt) {
-      window.handler.onPopupEscPress(evt, '.success');
-    });
+    window.addEventListener('click', onSuccessClick);
+    window.addEventListener('keydown', onEscSuccessPress);
   };
+
 
   var onError = function () {
     window.message.showError();
@@ -41,12 +62,8 @@
       window.handler.removeChild('main', '.error');
     });
 
-    window.addEventListener('click', function () {
-      window.handler.removeChild('main', '.error');
-    });
-    window.addEventListener('keydown', function (evt) {
-      window.handler.onPopupEscPress(evt, '.error');
-    });
+    window.addEventListener('click', onErrorClick);
+    window.addEventListener('keydown', onEscPress);
   };
 
   adForm.addEventListener('submit', function (evt) {

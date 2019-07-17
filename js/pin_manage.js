@@ -86,7 +86,7 @@
     var featureArray = Array.from(featureInput);
 
     window.pinManage.remove();
-    window.handler.removeChild('.map', '.map__card');
+    window.handler.removeChild('.map', 'article');
 
     var data = window.allPins;
 

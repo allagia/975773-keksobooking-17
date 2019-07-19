@@ -17,7 +17,7 @@
     preview = newDiv;
   };
 
-  window.avatar.uploadPhoto('.ad-form__input', onPhotoUpload);
+  window.file.uploadPhoto('.ad-form__input', onPhotoUpload);
 
   var removePhoto = function () {
     var divs = document.querySelectorAll('.ad-form__photo');

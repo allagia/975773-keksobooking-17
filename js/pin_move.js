@@ -78,6 +78,8 @@
       pageMap.classList.remove('map--faded');
       adForm.classList.remove('ad-form--disabled');
       deleteDisabledAttribute();
+      window.pin.appendAd(window.allPins.slice(window.pinManage.limits.FROM_NUMBER, window.pinManage.limits.TO_NUMBER));
+      window.pinManage.reload();
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);

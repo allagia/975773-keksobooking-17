@@ -1,9 +1,9 @@
 'use strict';
 
 (function () {
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
   var uploadPhoto = function (element, handler) {
-    var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
     var fileChooser = document.querySelector(element);
 
     fileChooser.addEventListener('change', function () {

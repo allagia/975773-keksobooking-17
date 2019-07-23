@@ -1,11 +1,15 @@
 'use strict';
 (function () {
-
+  var INITIAL_LEFT_COORDINATE = '570px';
+  var INITIAL_TOP_COORDINATE = '375px';
+  var INITIAL_PRICE = 1000;
   var adForm = document.querySelector('.ad-form');
   var pageMap = document.querySelector('.map');
   var mainPin = document.querySelector('.map__pin--main');
   var formReset = document.querySelector('.ad-form__reset');
   var mapFilters = document.querySelector('.map__filters');
+  var submitButton = document.querySelector('.ad-form__submit');
+  var priceInput = document.querySelector('#price');
 
   var onSuccessClick = function () {
     window.handler.removeChild('main', '.success');
@@ -31,15 +35,14 @@
     window.removeEventListener('keydown', onEscPress);
   };
 
-  var onSuccess = function () {
-
+  var resetForm = function () {
     adForm.reset();
     mapFilters.reset();
-    mainPin.style.left = '570px';
-    mainPin.style.top = '375px';
+    mainPin.style.left = INITIAL_LEFT_COORDINATE;
+    mainPin.style.top = INITIAL_TOP_COORDINATE;
     window.form.setAddress();
-    document.querySelector('#price').placeholder = '1000';
-    document.querySelector('#price').min = '1000';
+    priceInput.placeholder = INITIAL_PRICE;
+    priceInput.min = INITIAL_PRICE;
     pageMap.classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
     window.data.addDisabledAttribute();
@@ -47,16 +50,25 @@
     window.pinManage.remove();
     window.photo.remove();
     window.avatar.remove();
-    window.pin.appendAd(window.allPins.slice(window.pinManage.limits.FROM_NUMBER, window.pinManage.limits.TO_NUMBER));
+  };
+
+  var onFormReset = function () {
+    resetForm();
+  };
+
+  var onSuccess = function () {
+
+    resetForm();
     window.message.showSuccess();
+    submitButton.removeAttribute('disabled');
 
     window.addEventListener('click', onSuccessClick);
     window.addEventListener('keydown', onEscSuccessPress);
   };
 
-
   var onError = function () {
     window.message.showError();
+    submitButton.removeAttribute('disabled');
 
     var errorButton = document.querySelector('.error__button');
 
@@ -70,24 +82,9 @@
 
   adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
+    submitButton.setAttribute('disabled', '');
     window.exchange.upload(new FormData(adForm), onSuccess, onError);
   });
 
-  formReset.addEventListener('click', function () {
-    adForm.reset();
-    mapFilters.reset();
-    mainPin.style.left = '570px';
-    mainPin.style.top = '375px';
-    window.form.setAddress();
-    document.querySelector('#price').placeholder = '1000';
-    document.querySelector('#price').min = '1000';
-    pageMap.classList.add('map--faded');
-    adForm.classList.add('ad-form--disabled');
-    window.data.addDisabledAttribute();
-    window.handler.removeChild('.map', 'article');
-    window.pinManage.remove();
-    window.photo.remove();
-    window.avatar.remove();
-    window.pin.appendAd(window.allPins.slice(window.pinManage.limits.FROM_NUMBER, window.pinManage.limits.TO_NUMBER));
-  });
+  formReset.addEventListener('click', onFormReset);
 })();

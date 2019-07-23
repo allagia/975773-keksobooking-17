@@ -2,6 +2,9 @@
 
 (function () {
 
+  var PRICE_LOW = 10000;
+  var PRICE_HIGH = 50000;
+
   var Limits = {
     FROM_NUMBER: 0,
     TO_NUMBER: 5
@@ -18,58 +21,42 @@
     });
   };
 
-  var filterPriceCb = {
+  var filterPriceMap = {
     low: function (pin) {
-      return pin.offer.price < 10000;
+      return pin.offer.price < PRICE_LOW;
     },
     middle: function (pin) {
-      return pin.offer.price >= 10000 && pin.offer.price < 50000;
+      return pin.offer.price >= PRICE_LOW && pin.offer.price < PRICE_HIGH;
     },
     high: function (pin) {
-      return pin.offer.price >= 50000;
+      return pin.offer.price >= PRICE_HIGH;
     }
   };
 
-  var filterByPrice = function (data, filter) {
+  var getFilterByPrice = function (data, filter) {
     return filter === 'any'
       ? data
-      : data.filter(filterPriceCb[filter]);
-  };
-
-  var filterByRooms = function (data, filter) {
-    return filter === 'any'
-      ? data
-      : data.filter(function (pin) {
-        return String(pin.offer.rooms) === filter;
-      });
-  };
-
-  var filterByGuests = function (data, filter) {
-    return filter === 'any'
-      ? data
-      : data.filter(function (pin) {
-        return String(pin.offer.guests) === filter;
-      });
-  };
-
-  var filterByType = function (data, filter) {
-    return filter === 'any'
-      ? data
-      : data.filter(function (pin) {
-        return pin.offer.type === filter;
-      });
+      : data.filter(filterPriceMap[filter]);
   };
 
   var isElementExist = function (arr, elem) {
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i] === elem) {
+    return arr.some(function (element) {
+      if (element === elem) {
         return true;
       }
-    }
-    return false;
+      return false;
+    });
   };
 
-  var filterByFeature = function (data, filter) {
+  var getFilterByType = function (data, filter, type) {
+    return filter === 'any'
+      ? data
+      : data.filter(function (pin) {
+        return String(pin.offer[type]) === filter;
+      });
+  };
+
+  var getFilterByFeature = function (data, filter) {
     return data.filter(function (pin) {
       return isElementExist(pin.offer.features, filter);
     });
@@ -82,22 +69,22 @@
     var housingRooms = mapFilters.querySelector('#housing-rooms');
     var housingGuests = mapFilters.querySelector('#housing-guests');
 
-    var featureInput = mapFilters.querySelectorAll('input[type = "checkbox"]');
-    var featureArray = Array.from(featureInput);
+    var featureInputs = mapFilters.querySelectorAll('input[type = "checkbox"]');
+    var features = Array.from(featureInputs);
 
     window.pinManage.remove();
     window.handler.removeChild('.map', 'article');
 
     var data = window.allPins;
 
-    data = filterByType(data, housingType.options[housingType.selectedIndex].value);
-    data = filterByRooms(data, housingRooms.options[housingRooms.selectedIndex].value);
-    data = filterByGuests(data, housingGuests.options[housingGuests.selectedIndex].value);
-    data = filterByPrice(data, housingPrice.options[housingPrice.selectedIndex].value);
+    data = getFilterByType(data, housingType.options[housingType.selectedIndex].value, 'type');
+    data = getFilterByType(data, housingRooms.options[housingRooms.selectedIndex].value, 'rooms');
+    data = getFilterByType(data, housingGuests.options[housingGuests.selectedIndex].value, 'guests');
+    data = getFilterByPrice(data, housingPrice.options[housingPrice.selectedIndex].value);
 
-    featureArray.forEach(function (element) {
+    features.forEach(function (element) {
       if (element.checked) {
-        data = filterByFeature(data, element.value);
+        data = getFilterByFeature(data, element.value);
       }
     });
 

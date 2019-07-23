@@ -29,9 +29,12 @@
     var similarList = document.querySelector('.map__pins');
     var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < ads.length; i++) {
-      fragment.appendChild(renderAdPin(ads[i]));
-    }
+    ads.forEach(function (element) {
+      fragment.appendChild(renderAdPin(element));
+    });
+    // for (var i = 0; i < ads.length; i++) {
+    //   fragment.appendChild(renderAdPin(ads[i]));
+    // }
 
     similarList.appendChild(fragment);
   };

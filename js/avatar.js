@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var INITIAL_IMAGE_ADDRESS = 'img/muffin-grey.svg';
 
   var preview = document.querySelector('.ad-form-header__preview img');
 
@@ -11,7 +12,7 @@
   window.file.uploadPhoto('.ad-form-header__input', onAvatarUpload);
 
   var removeAvatar = function () {
-    preview.src = 'img/muffin-grey.svg';
+    preview.src = INITIAL_IMAGE_ADDRESS;
   };
 
   window.avatar = {

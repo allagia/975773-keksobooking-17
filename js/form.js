@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-
+  var MAX_NUMBER_OF_ROOMS = 100;
+  var INVALID_CAPACITY_MESSAGE = 'Неподходящее число гостей';
   var mainPin = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
   var inputAddress = adForm.querySelector('input[name = address]');
@@ -59,11 +60,11 @@
   var onRoomCapacityChange = function () {
     var currentNumberValue = roomNumber.options[roomNumber.selectedIndex].value;
     var currentCapacityValue = roomCapacity.options[roomCapacity.selectedIndex].value;
-    if ((currentNumberValue === '100' && currentCapacityValue !== '0') ||
-        (currentNumberValue !== '100' && currentCapacityValue === '0')) {
-      roomCapacity.setCustomValidity('Неподходящее число гостей');
+    if ((currentNumberValue === String(MAX_NUMBER_OF_ROOMS) && currentCapacityValue !== '0') ||
+        (currentNumberValue !== String(MAX_NUMBER_OF_ROOMS) && currentCapacityValue === '0')) {
+      roomCapacity.setCustomValidity(INVALID_CAPACITY_MESSAGE);
     } else if (currentCapacityValue > currentNumberValue) {
-      roomCapacity.setCustomValidity('Неподходящее число гостей');
+      roomCapacity.setCustomValidity(INVALID_CAPACITY_MESSAGE);
     } else {
       roomCapacity.setCustomValidity('');
     }
